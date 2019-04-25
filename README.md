@@ -12,7 +12,7 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 1. [Introduction Video](https://youtu.be/It4PRFJJaF0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/1-introduction)
 2. [Installation Video](https://youtu.be/4QnDgxtWqOI) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/2-installation)
-3. [Content Types Video](https://youtu.be/cPEkpfik6X4) - [Branch](#)
+3. [Content Types Video](https://youtu.be/cPEkpfik6X4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/3-content-types)
 
 ---
 
