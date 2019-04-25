@@ -2,14 +2,15 @@
 
 From the [Gatsby / Strapi Video Tutorial Series](https://youtu.be/It4PRFJJaF0).
 
-Code examples for the folder "cms". `Path: ./tutorial/cms` <- **Strapi Project**
-Code examples for the folder "blog". `Path: ./tutorial/blog`. <- **Gatsby Project**
+-   Code examples for the folder "cms". `Path: ./tutorial/cms` <- **Strapi Project**
+
+-   Code examples for the folder "blog". `Path: ./tutorial/blog`. <- **Gatsby Project**
 
 ## Tutorial Branch Index
 
 Each video has a Branch. Each branch contains the code at the **END** of the video. If there was no code changes within video. This will be noted.
 
-1. [Introduction Video](https://youtu.be/It4PRFJJaF0)
+1. [Introduction Video](https://youtu.be/It4PRFJJaF0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/1-introduction)
 
 ---
 
