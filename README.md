@@ -65,8 +65,6 @@ Additional information can be found in the [Official Strapi documentation](https
 
 Add your first user from the [registration page](http://localhost:1337/admin/plugins/users-permissions/auth/register). This will be the **_root admin user_**.
 
-![Tutorial](/content/images/2018/01/Screen-Shot-2018-01-17-at-21.09.14.png)
-
 #### Restarting Strapi
 
 After installation, and initial use, you will often close your project and work on other things, reboot your computer, etc. Therefore, you will need to restart Strapi and your project.
