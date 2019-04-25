@@ -16,37 +16,36 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 4. [Roles and Permissions Video](https://youtu.be/1jev6QRwcSo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/4-roles-and-permissions)
 5. [Setting up Gatsby Video](https://youtu.be/SnrEEW1uTlU) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/5-setting-up-gatsby)
 6. [Create our Index Page Video](https://youtu.be/UaFgCubwRD8) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/6-create-our-index-page)
+7. [Create the Article Page View Video](https://youtu.be/ub-uB17ufe0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/7-create-the-article-page-view)
 
 ---
 
-### 6. Create our Index Page
+### 7. Create the Article page view
 
 _Important links from Video:_
 
--   [The graphQL interface from your local host](http://localhost:8000/___graphql)
+-   [Gatsby Project Structure](https://www.gatsbyjs.org/docs/gatsby-project-structure/#gatsby-project-structure)
 
-#### Articles list
+#### Article view
 
-First, we want to display the list of articles. To do so, add the following content in the existing home page file:
+Our website now starts looking like a blog which is a good thing. However, an important part is still missing: the article’s details page.
 
-_Path: `blog/src/pages/index.js`_
+Let's create the template, containing a specific GraphQL request and defining the content displayed:
 
-<script src="https://gist.github.com/strapi-codesnipets/b539c29f405ed2cc202242ceb3c861df.js"></script>
+In order to do this, first create a folder called `templates` in your `src` directory. Then within `templates` create a file called `article.js`.
 
-##### What are we doing here?
+_Path: `blog/src/templates/article.js`_
 
-At the end of the file, we export `pageQuery`, a GraphQL query which requests the entire list of articles. As you can see, we require only the `id`, `title` and `content` fields, thanks to the precise GraphQL query language.
+<script src="https://gist.github.com/strapi-codesnipets/9735a941cdbf1947625c66c19e420e7f.js"></script>
 
-Then, we pass the `{ data }` destructured object as parameter of `IndexPage` and loop on its `allStrapiArticle` object to display the data.
+That looks fine, but at this point, Gatsby does not know when this template should be displayed. Each article needs a specific URL. So, we are going to inform Gatsby about the new URLs we need thanks to the [`createPage` function](https://www.gatsbyjs.org/docs/creating-and-modifying-pages).
 
-##### Tip: generate your GraphQL query in seconds!
+First, we are going to code a new function called `makeRequest` to execute the GraphQL request. Then, we export a function named `createPages` in which we get the list of articles and create a page for each of them. Here is the result:
 
-Gatsby includes a useful GraphiQL interface. It makes GraphQL queries development way easier and intuitive. [Take look at it](http://localhost:8000/___graphql) and try to create some queries.
+_Path: `blog/gatsby-node.js`_
 
-##### Adding images
+<script src="https://gist.github.com/strapi-codesnipets/c9c4212fcef1af5801195b9670c67dee.js"></script>
 
-To add images, we will need to import `Img` from package `gatsby-image` installed by default. Replace the content of `blog/src/pages/index.js` with the following :
+Restart the Gatsby server.
 
-Path: `blog/src/pages/index.js`
-
-<script src="https://gist.github.com/strapi-codesnipets/9ddadb5e03de3e1e543b82a44b4c7695.js"></script>
+From now on, you should be able to visit the detail page by clicking on URLs displayed on the homepage.
