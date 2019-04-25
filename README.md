@@ -15,76 +15,38 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 3. [Content Types Video](https://youtu.be/cPEkpfik6X4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/3-content-types)
 4. [Roles and Permissions Video](https://youtu.be/1jev6QRwcSo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/4-roles-and-permissions)
 5. [Setting up Gatsby Video](https://youtu.be/SnrEEW1uTlU) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/5-setting-up-gatsby)
+6. [Create our Index Page Video](https://youtu.be/UaFgCubwRD8) - [Branch](#)
 
 ---
 
-### 5. Setting up Gatsby
+### 6. Create our Index Page
 
 _Important links from Video:_
 
--   [Official Gatsby Documentation](https://www.gatsbyjs.org/docs/)
--   [Gatsby PWA support](https://gatsby.app/offline)
+-   [The graphQL interface from your local host](http://localhost:8000/___graphql)
 
-#### Install Gatsby
+#### Articles list
 
-First, install Gatsby CLI:
+First, we want to display the list of articles. To do so, add the following content in the existing home page file:
 
-```
-npm install --global gatsby-cli
-```
+_Path: `blog/src/pages/index.js`_
 
-#### Generate a Gatsby project
+<script src="https://gist.github.com/strapi-codesnipets/b539c29f405ed2cc202242ceb3c861df.js"></script>
 
-In the folder `tutorial` that you previously created, generate your brand new blog:
+##### What are we doing here?
 
-```
-gatsby new blog
-```
+At the end of the file, we export `pageQuery`, a GraphQL query which requests the entire list of articles. As you can see, we require only the `id`, `title` and `content` fields, thanks to the precise GraphQL query language.
 
-#### Start in development mode
+Then, we pass the `{ data }` destructured object as parameter of `IndexPage` and loop on its `allStrapiArticle` object to display the data.
 
-Enter in your project's folder:
+##### Tip: generate your GraphQL query in seconds!
 
-```
-cd blog
-```
+Gatsby includes a useful GraphiQL interface. It makes GraphQL queries development way easier and intuitive. [Take look at it](http://localhost:8000/___graphql) and try to create some queries.
 
-Start the server:
+##### Adding images
 
-```
-gatsby develop
-```
+To add images, we will need to import `Img` from package `gatsby-image` installed by default. Replace the content of `blog/src/pages/index.js` with the following :
 
-At this point, you should already be able to get access to your Gatsby website at this address: http://localhost:8000.
+Path: `blog/src/pages/index.js`
 
-#### Install the Strapi source plugin
-
-When you manage a static website, your data can come from different sources: Markdown files, CSV files, a WordPress website (using the JSON REST API plugin), etc.
-
-Gatsby understands this pretty well. So its creators decided to build a specific and independent layer: the data layer. This entire system is strongly powered by [GraphQL](http://graphql.org).
-
-To connect Gatsby to a new source of data, you have to [develop a new source plugin](https://www.gatsbyjs.org/docs/create-source-plugin). Fortunately, [several source plugins already exist](https://www.gatsbyjs.org/docs/plugins), so one of them should fill your needs.
-
-In this example, we are using Strapi. Obviously, we are going to need a source plugin for Strapi APIs. Good news: [we built it for you](https://github.com/strapi/gatsby-source-strapi)!
-
-Let's install it:
-
-```
-npm install --save gatsby-source-strapi
-```
-
-This plugin needs to be configured. Replace the content of `gatsby-config.js` with:
-
-_Path: `blog/gatsby-config.js`_
-
-<script src="https://gist.github.com/strapi-codesnipets/d5cf303382d7dfbd7f61b005028ef143.js"></script>
-
-#### Allow access to User
-
-Remember, when we created the content type we created a relation between User and Articles.
-
-Like `Article`,`User`, [link](http://localhost:1337/articles) is likewise, by default, restricted. But Gatsby needs access, so to allow access, visit the [Auth and Permissions section for Public role](http://localhost:1337/admin/plugins/users-permissions/roles), click on `Public`, select the `User - find` action and save. After saving; Gatsby will have access to all the necessary content types managed by Strapi (for this tutorial).
-
-Restart Strapi from the command line, inside the `cms` folder - first by `Ctrl`+ `C` to stop the server; and then typing `strapi start`, to restart it.
-
-Next, restart the server to ensure Gatsby registers these updates.
+<script src="https://gist.github.com/strapi-codesnipets/9ddadb5e03de3e1e543b82a44b4c7695.js"></script>
