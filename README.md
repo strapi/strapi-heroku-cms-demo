@@ -1,6 +1,9 @@
 ## Strapi with Gatsby Video Tutorial Series
 
-Repository for the folder "CMS". `Path: ./tutorial/CMS` from the [Gatsby / Strapi Video Tutorial Series](https://youtu.be/It4PRFJJaF0).
+From the [Gatsby / Strapi Video Tutorial Series](https://youtu.be/It4PRFJJaF0).
+
+Code examples for the folder "cms". `Path: ./tutorial/cms` <- **Strapi Project**
+Code examples for the folder "blog". `Path: ./tutorial/blog`. <- **Gatsby Project**
 
 ## Tutorial Branch Index
 
