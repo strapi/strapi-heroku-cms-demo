@@ -11,7 +11,7 @@ From the [Gatsby / Strapi Video Tutorial Series](https://youtu.be/It4PRFJJaF0).
 Each video has a Branch. Each branch contains the code at the **END** of the video. If there was no code changes within video. This will be noted.
 
 1. [Introduction Video](https://youtu.be/It4PRFJJaF0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/1-introduction)
-2. [Installation Video](https://youtu.be/4QnDgxtWqOI) - [Branch]()
+2. [Installation Video](https://youtu.be/4QnDgxtWqOI) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/2-installation)
 
 ---
 
