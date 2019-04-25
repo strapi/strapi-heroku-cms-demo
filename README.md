@@ -13,35 +13,16 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 1. [Introduction Video](https://youtu.be/It4PRFJJaF0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/1-introduction)
 2. [Installation Video](https://youtu.be/4QnDgxtWqOI) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/2-installation)
 3. [Content Types Video](https://youtu.be/cPEkpfik6X4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/3-content-types)
+4. [Roles and Permissions Video](https://youtu.be/1jev6QRwcSo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/4-roles-and-permissions)
 
 ---
 
-### 3. Content Types
+### 4. Roles and Permissions
 
-_Important links from Video:_
+#### Allow access to Article
 
--   [Sample Content for Demo](https://github.com/strapi/strapi-examples/tree/master/gatsby-strapi-tutorial/content-for-tutorial)
+For security reasons, [API access](http://localhost:1337/articles) is, by default, restricted. To allow access, visit the [Auth and Permissions section for Public role](http://localhost:1337/admin/plugins/users-permissions/roles), click on `Public`, select the `Article - find` action and save. At this point, you should be able to [request the list of articles](http://localhost:1337/articles).
 
-#### Create a Content Type
+#### Static website development
 
-Strapi CMS projects are based on a data structure called Content Types (equivalent to models in frameworks and Content Types in Wordpress).
-
-[Create a Content Type](http://localhost:1337/admin/plugins/content-type-builder/) named `article` with four fields:
-
--   `title` (type `string`)
--   `content` (type `text`)
--   `image` (type `media`)
--   `author` (type `relation`, many articles to one user)
-
-After creating your fields, as above, save your new content type and wait for Strapi to restart.
-
-#### Insert some entries
-
-Add some articles in the database. To do so, follow these instructions:
-
-1.  Visit the [articles list page](http://localhost:1337/admin/plugins/content-manager/article).
-2.  Click on `Add New Article`.
-3.  Insert values, link to an author and submit the form.
-4.  Create two other articles.
-
-Note: You can download the sample content from the video [here](https://github.com/strapi/strapi-examples/tree/master/gatsby-strapi-tutorial/content-for-tutorial).
+Great job, our API is ready! We can start developing the static website.
