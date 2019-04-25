@@ -48,6 +48,10 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "articles": {
+      "collection": "article",
+      "via": "author"
     }
   },
   "collectionName": "users-permissions_user"
