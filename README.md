@@ -27,62 +27,139 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 10. [Set-up Cloudinary & Netlify Predeploy Video](https://youtu.be/n-_CzffU0xA) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/10-setup-cloudinary-and-netlify-predeploy)
 
-### 10. Set-up Cloudinary & Netlify Predeploy
+11. [Deploy Gatgsby to Netlify Video](https://youtu.be/rzR3yn9Ej3o) - [Branch](#)
+
+### 11. Deploy Gatsby to Netlify
 
 _Important links from Video:_
 
--   [Create Free Account with Cloudinary](https://cloudinary.com/signup)
+-   [Create Free Account with Netlify](https://app.netlify.com/signup)
+-   [Netlify CLI Documentation](https://www.netlify.com/docs/cli/)
+-   [Video Demo URL](https://tutorial-netlify-demo.netlify.com/)
+-   [This Video Tutorial GitHub DEMO](https://github.com/davidkartuzinski/tutorial-netlify-demo)
+-   [Long-term Netlify Demo](https://strapi-gatsby-postgresql-demo.netlify.com/)
+-   [Long-term Netlify Demo GitHub](https://github.com/davidkartuzinski/strapi-gatsby-postgresql-demo)
 
-DEMO Urls:
+You are going to need to prepare a few things:
 
--   [Strapi Welcome on Heroku](https://strapi-gatsby-postgresql-demo.herokuapp.com/)
--   [Strapi Admin Login on Heroku](https://strapi-gatsby-postgresql-demo.herokuapp.com/admin/)
+-   Sign-up for a [Free Account with Netlify](https://app.netlify.com/signup)
+-   Create a [new GitHub Repo](https://help.github.com/en/articles/create-a-repo) where your Gatsby site will live and be updated from.
 
-API demos:
+Next, the **Gatsby** part of your project, needs to be pushed to your new GitHub repo:
 
--   [All Articles API](https://strapi-gatsby-postgresql-demo.herokuapp.com/articles)
--   [One Article API](https://strapi-gatsby-postgresql-demo.herokuapp.com/articles/1)
-
-At this point, when you upload images to Strapi on Heroku, the images are not permanently saved. The reason is because they are saved to a temporary cache which gets deleted whenever Heroku goes to sleep.
-
-Therefore, you will want to use a 3rd party service to upload to and then serve your images from. This tutorial continues with [Cloudinary](https://cloudinary.com/).
-
--   First, [create a Free Account with Cloudinary](https://cloudinary.com/signup)
--   Use NPM to install the Strapi Cloudinary plugin, from your command line:
-
-`Path: ./`
+`Path: ./blog/`
 
 ```
-cd plugins/upload
-```
-
-Next, install the plugin with npm, commit and push your changes to Heroku:
-
-`Path: ./plugins/upload`
-
-```
-npm i --save strapi-provider-upload-cloudinary
+git init
 git add .
-git commit -m "Installed Cloudinary Plugin"
-git push heroku master
+git commit -m "first commit"
+git remote add origin git@github.com:YOUR-NAME/YOUR-NEW-EMPTY-REPO.git
+git push -u origin master
 ```
 
-Wait for Heroku to install the packages and to restart the server instance.
+After setting up your Gatsby site on GitHub for deployment to Netlify, we need to edit the `gatsby-config.js`.
 
-From your Cloudinary console, you will next enter your Cloudinary credentials so Strapi can properly send your images:
+Locate `gatsby-source-strapi` plugin object and replace it with the following code:
 
-From the Strapi Dashboard, click on `Plugins` and then for `FILES UPLOAD` click the `cog` icon.
+`Path: ./blog/gatsby-config.js`
 
-Select `Cloudinary` in the `Providers` dropdown and enter in your credentials:
+```js
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: process.env.DEPLOY_URL
+          ? "https://YOUR-APP-URL.herokuapp.com"
+          : "http://localhost:1337",
+        contentTypes: [`article`, `user`],
+        queryLimit: 1000,
+      },
+    },
 
--   Cloud name
--   API Key
--   API Secret
+```
 
-Then save your changes in the `Upload - Settings`.
+Open your `.gitignore` file and add `package-lock.json` to the ignore list.
 
-Delete from `Files Upload` the references to previously uploaded images.
+`Path: ./.gitignore`
 
-Now, for each content-type containing images, upload again the images that corresponds to your existing content:
+```
+...
 
-From now on, new content will automatically have their images saved and served from Cloudinary.
+# Yarn
+yarn-error.log
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity
+
+package-lock.json
+```
+
+Next, you need to `git add`, `git commit` and `git push` your new changes. From your command line:
+
+`Path: ./blog/`
+
+```
+git add .
+git commit -m "Update config-gatsby.js and .gitignore file"
+git push
+```
+
+In order to easily push your Gatsby site to Netlify, you have to install and login to Netlify using the `Netlify CLI`:
+
+From your command line:
+
+```
+npm install netlify-cli -g
+netlify login
+```
+
+Press the `Authorize` button and close the tab or window.
+
+Netlify is now set-up on your computer. It's time to initialize your project (Please pay close attention to the `build command` and `directory`):
+
+`Path: ./blog/`
+
+```
+netlify init
+? What would you like to do? + Create & configure a new site
+? Site name (optional):
+? Team: YOUR NAME HERE
+
+Site Created
+
+Admin url: https://app.netlify.com/sites/SITE-NAME
+Site url:  https://SITE-NAME.netlify.com
+Site ID: YOUR-UNIQUE-SITE-ID
+
+? Your build command (hugo/yarn run build/etc): gatsby build
+? Directory to deploy (blank for current dir): public
+? No netlify.toml detected. Would you like to create one with these build settings? Yes
+
+Creating Netlify Github Notification Hooks...
+Netlify Notification Hooks configured!
+
+Netlify CI/CD Configured!
+
+The site is now configured to automatically deploy from github branches & pull requests
+
+Next steps:
+
+  git push       Push to your git repository to trigger new site builds
+  netlify open   Open the Netlify adlin URL of your site
+
+```
+
+A last `git add`, `git commit` and `git push` are needed in order to finish the connection between your github and Netlify. Then open your `Netlify Deployment Console`.
+
+From your command line:
+
+`Path: ./blog/`
+
+```
+git add .
+git commit -m "netlify config settings files"
+git push
+netlify open
+```
+
+After Netlify finishes deploying your site, you can click the green site link to see it.
