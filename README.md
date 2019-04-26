@@ -25,7 +25,7 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 -   9A. [Configure Again Permissions](https://youtu.be/e_Edsv49BJ0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9a-configure-again-permissions)
 
-10. [Set-up Cloudinary & Netlify Predeploy Video](https://youtu.be/n-_CzffU0xA) - [Branch](#)
+10. [Set-up Cloudinary & Netlify Predeploy Video](https://youtu.be/n-_CzffU0xA) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/10-setup-cloudinary-and-netlify-predeploy)
 
 ### 10. Set-up Cloudinary & Netlify Predeploy
 
