@@ -19,12 +19,13 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "dependencies": {
+    "knex": "latest",
     "lodash": "^4.17.5",
+    "pg": "^7.10.0",
+    "sqlite3": "latest",
     "strapi": "3.0.0-alpha.25.2",
     "strapi-hook-bookshelf": "3.0.0-alpha.25.2",
-    "strapi-hook-knex": "3.0.0-alpha.25.2",
-    "knex": "latest",
-    "sqlite3": "latest"
+    "strapi-hook-knex": "3.0.0-alpha.25.2"
   },
   "author": {
     "name": "david",

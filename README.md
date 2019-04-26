@@ -21,35 +21,54 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 -   8B. [Specify Node Version](https://youtu.be/5uTR1uOZZQo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/8b-specify-node-version)
 
-### 8B. Specify Node Version
+9. [Deploy to Heroku](https://youtu.be/M1rEwMXK2z4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9-deploy-to-heroku)
+
+### 9. Deploy to Heroku
 
 _Important links from Video:_
 
--   [Nodejs 12 Release Notes](https://nodejs.org/en/blog/release/v12.0.0/)
--   [Heroku Docs Deploying Nodejs](https://devcenter.heroku.com/articles/deploying-nodejs)
+-   [Create Free Account with Heroku](https://signup.heroku.com/login)
+-   [Strapi Documentation - Deploying to Heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku)
+-   [Heroku Postgress Add-on](https://elements.heroku.com/addons/heroku-postgresql)
+-   [Heroku CLI Docmentation](https://devcenter.heroku.com/articles/heroku-cli)
 
-On April 23, 2019 Node v12.0.0 was released. There is an incompatibility or bug that is present regarding SQLite.
+We will deploy Strapi to Heroku. You will need a [free account with Heroku](https://signup.heroku.com/login).
 
-Therefore, make the following change to your `package.json` file found in your _Strapi_ project root:
+Next install the [Heroku CLI](https://strapi.io/documentation/3.x.x/guides/deployment.html#_1-heroku-cli-installation).
 
-_Path: `cms/package.json`_
+These commands are to [login to Heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#_2-login-to-heroku-from-your-cli) and to [create a new Strapi Project](https://strapi.io/documentation/3.x.x/guides/deployment.html#_3-create-a-new-project-or-use-an-existing-one).
 
-Change the `engines`object from:
+`Path: ./`
 
-```json
-  "engines": {
-    "node": ">= 10.0.0",
-    "npm": ">= 6.0.0"
-  },
+```
+heroku login
 ```
 
-To:
+Open your editor and add `package-lock.json` to the `.gitignore` file.
 
-```json
-  "engines": {
-    "node": "10.x",
-    "npm": ">= 6.0.0"
-  },
+Next, you will need to init Git and [commit your project](https://strapi.io/documentation/3.x.x/guides/deployment.html#_5-init-a-git-repository-and-commit-your-project)
+
+```
+cd my-project
+git init
+git add .
+git commit -am "Initial Commit"
 ```
 
-After changing your file and saving it, you may simply continue to the next section.
+Create a Heroku Project.
+
+```
+heroku create
+```
+
+You can set-up different databases to work with Strapi. Here are step-by-step instructions to [set-up a PostgreSQL](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku-postgresql) or a [MongoDB](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku-mongodb) database. Follow the steps in the links.
+
+Lastly, [commit](https://strapi.io/documentation/3.x.x/guides/deployment.html#_8-commit-your-changes), [push to heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#_9-deploy), and open your project.
+
+```
+git commit -am "Update database config"
+git push heroku master
+heroku open
+```
+
+If your browser window open at the Heroku URL, congratulations. If not, please review [the documentation](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku) and [the video](https://www.youtube.com/watch?v=M1rEwMXK2z4) for additional details.
