@@ -23,52 +23,19 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 9. [Deploy to Heroku Video](https://youtu.be/M1rEwMXK2z4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9-deploy-to-heroku)
 
-### 9. Deploy to Heroku
+-   9A. [Configure Again Permissions](https://youtu.be/e_Edsv49BJ0) - [Branch](#)
 
-_Important links from Video:_
+### 9A. Configure again Permissions
 
--   [Create Free Account with Heroku](https://signup.heroku.com/login)
--   [Strapi Documentation - Deploying to Heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku)
--   [Heroku Postgress Add-on](https://elements.heroku.com/addons/heroku-postgresql)
--   [Heroku CLI Docmentation](https://devcenter.heroku.com/articles/heroku-cli)
+You have to allow access through the API under `Roles & Permission` from your Strapi Dashboard.
 
-We will deploy Strapi to Heroku. You will need a [free account with Heroku](https://signup.heroku.com/login).
+You have already set these permissions on your local Dev environment. But these settings need to be set again for Heroku as these settings are saved to a database and the Heroku PostgreSQL database is different than your local Dev environment.
 
-Next install the [Heroku CLI](https://strapi.io/documentation/3.x.x/guides/deployment.html#_1-heroku-cli-installation).
+-   Login to your Strapi Dashboard, from `https://your-heroku-url.herokuapp.com/admin`.
+-   Go to `Roles and Permission` and then click on `Public`. Set your `Article` permissions so `find` and `findone` are checked.
 
-These commands are to [login to Heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#_2-login-to-heroku-from-your-cli) and to [create a new Strapi Project](https://strapi.io/documentation/3.x.x/guides/deployment.html#_3-create-a-new-project-or-use-an-existing-one).
+-   Within `Roles and Permission` and `Public`, scroll to and click on `USERS-PERMISSIONS`, and set `User` permissions `find` to checked.
 
-`Path: ./`
+-   Save these changes
 
-```
-heroku login
-```
-
-Open your editor and add `package-lock.json` to the `.gitignore` file.
-
-Next, you will need to init Git and [commit your project](https://strapi.io/documentation/3.x.x/guides/deployment.html#_5-init-a-git-repository-and-commit-your-project)
-
-```
-cd my-project
-git init
-git add .
-git commit -am "Initial Commit"
-```
-
-Create a Heroku Project.
-
-```
-heroku create
-```
-
-You can set-up different databases to work with Strapi. Here are step-by-step instructions to [set-up a PostgreSQL](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku-postgresql) or a [MongoDB](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku-mongodb) database. Follow the steps in the links.
-
-Lastly, [commit](https://strapi.io/documentation/3.x.x/guides/deployment.html#_8-commit-your-changes), [push to heroku](https://strapi.io/documentation/3.x.x/guides/deployment.html#_9-deploy), and open your project.
-
-```
-git commit -am "Update database config"
-git push heroku master
-heroku open
-```
-
-If your browser window open at the Heroku URL, congratulations. If not, please review [the documentation](https://strapi.io/documentation/3.x.x/guides/deployment.html#heroku) and [the video](https://www.youtube.com/watch?v=M1rEwMXK2z4) for additional details.
+You have now allowed access through the API to `Articles`, `Article` and `Users`.
