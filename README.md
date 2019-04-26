@@ -23,7 +23,7 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 9. [Deploy to Heroku Video](https://youtu.be/M1rEwMXK2z4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9-deploy-to-heroku)
 
--   9A. [Configure Again Permissions](https://youtu.be/e_Edsv49BJ0) - [Branch](#)
+-   9A. [Configure Again Permissions](https://youtu.be/e_Edsv49BJ0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9a-configure-again-permissions)
 
 ### 9A. Configure again Permissions
 
