@@ -25,17 +25,64 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 -   9A. [Configure Again Permissions](https://youtu.be/e_Edsv49BJ0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9a-configure-again-permissions)
 
-### 9A. Configure again Permissions
+10. [Set-up Cloudinary & Netlify Predeploy Video](https://youtu.be/n-_CzffU0xA) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/10-setup-cloudinary-and-netlify-predeploy)
 
-You have to allow access through the API under `Roles & Permission` from your Strapi Dashboard.
+### 10. Set-up Cloudinary & Netlify Predeploy
 
-You have already set these permissions on your local Dev environment. But these settings need to be set again for Heroku as these settings are saved to a database and the Heroku PostgreSQL database is different than your local Dev environment.
+_Important links from Video:_
 
--   Login to your Strapi Dashboard, from `https://your-heroku-url.herokuapp.com/admin`.
--   Go to `Roles and Permission` and then click on `Public`. Set your `Article` permissions so `find` and `findone` are checked.
+-   [Create Free Account with Cloudinary](https://cloudinary.com/signup)
 
--   Within `Roles and Permission` and `Public`, scroll to and click on `USERS-PERMISSIONS`, and set `User` permissions `find` to checked.
+DEMO Urls:
 
--   Save these changes
+-   [Strapi Welcome on Heroku](https://strapi-gatsby-postgresql-demo.herokuapp.com/)
+-   [Strapi Admin Login on Heroku](https://strapi-gatsby-postgresql-demo.herokuapp.com/admin/)
 
-You have now allowed access through the API to `Articles`, `Article` and `Users`.
+API demos:
+
+-   [All Articles API](https://strapi-gatsby-postgresql-demo.herokuapp.com/articles)
+-   [One Article API](https://strapi-gatsby-postgresql-demo.herokuapp.com/articles/1)
+
+At this point, when you upload images to Strapi on Heroku, the images are not permanently saved. The reason is because they are saved to a temporary cache which gets deleted whenever Heroku goes to sleep.
+
+Therefore, you will want to use a 3rd party service to upload to and then serve your images from. This tutorial continues with [Cloudinary](https://cloudinary.com/).
+
+-   First, [create a Free Account with Cloudinary](https://cloudinary.com/signup)
+-   Use NPM to install the Strapi Cloudinary plugin, from your command line:
+
+`Path: ./`
+
+```
+cd plugins/upload
+```
+
+Next, install the plugin with npm, commit and push your changes to Heroku:
+
+`Path: ./plugins/upload`
+
+```
+npm i --save strapi-provider-upload-cloudinary
+git add .
+git commit -m "Installed Cloudinary Plugin"
+git push heroku master
+```
+
+Wait for Heroku to install the packages and to restart the server instance.
+
+From your Cloudinary console, you will next enter your Cloudinary credentials so Strapi can properly send your images:
+
+From the Strapi Dashboard, click on `Plugins` and then for `FILES UPLOAD` click the `cog` icon.
+
+Select `Cloudinary` in the `Providers` dropdown and enter in your credentials:
+
+-   Cloud name
+-   API Key
+-   API Secret
+
+Then save your changes in the `Upload - Settings`.
+
+Delete from `Files Upload` the references to previously uploaded images.
+
+Now, for each content-type containing images, upload again the images that corresponds to your existing content:
+
+From now on, new content will automatically have their images saved and served from Cloudinary.
