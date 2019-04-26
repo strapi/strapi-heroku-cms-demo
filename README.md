@@ -21,7 +21,7 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 -   8B. [Specify Node Version](https://youtu.be/5uTR1uOZZQo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/8b-specify-node-version)
 
-9. [Deploy to Heroku](https://youtu.be/M1rEwMXK2z4) - [Branch](#)
+9. [Deploy to Heroku](https://youtu.be/M1rEwMXK2z4) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/9-deploy-to-heroku)
 
 ### 9. Deploy to Heroku
 
