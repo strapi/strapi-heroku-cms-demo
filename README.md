@@ -19,30 +19,37 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 7. [Create the Article Page View Video](https://youtu.be/ub-uB17ufe0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/7-create-the-article-page-view)
 8. [Create the Article Page View Video](https://youtu.be/mPyJrjD3oU0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/8-gatsby-images-and-author-page)
 
----
+-   **8B** [Specify Node Version](https://youtu.be/5uTR1uOZZQo) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/8-gatsby-images-and-author-page)
 
-### 8. Gatsby Images and author page
+### 8B. Specify Node Version
 
 _Important links from Video:_
 
--   [Gatsby Image Plugin](https://www.gatsbyjs.org/packages/gatsby-image/)
--   [Gatsby Image Demo](https://using-gatsby-image.gatsbyjs.org/)
--   [Gatsby Code examples for Image Plugin](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-gatsby-image/src/pages)
+-   [Nodejs 12 Release Notes](https://nodejs.org/en/blog/release/v12.0.0/)
+-   [Heroku Docs Deploying Nodejs](https://devcenter.heroku.com/articles/deploying-nodejs)
 
-#### Author view
+On April 23, 2019 Node v12.0.0 was released. There is an incompatibility or bug that is present regarding SQLite.
 
-Articles are written by authors. They deserve a dedicated page.
+Therefore, make the following change to your `package.json` file found in your _Strapi_ project root:
 
-The processes for creating author views and article pages are very similar. First, create a new file in our `templates` folder called, `author.js`. Add the code below to this file.
+_Path: `cms/package.json`_
 
-_Path: `blog/src/templates/author.js`_
+Change the `engines`object from:
 
-<script src="https://gist.github.com/strapi-codesnipets/7a32216a4ccda60f3dc229294b19b444.js"></script>
+```json
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 6.0.0"
+  },
+```
 
-Second, we update the `gatsby-node.js` file to create the URLs (with the below code):
+To:
 
-_Path: `blog/gatsby-node.js`_
+```json
+  "engines": {
+    "node": "10.x",
+    "npm": ">= 6.0.0"
+  },
+```
 
-<script src="https://gist.github.com/strapi-codesnipets/d7fd2b3a1b24452acfe5b45854157780.js"></script>
-
-Finally, restart the server and visit the author page from the article view's links.
+After changing your file and saving it, you may simply continue to the next section.
