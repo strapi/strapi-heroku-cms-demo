@@ -29,6 +29,44 @@ _Important links from Video:_
 -   [Gatsby Image Demo](https://using-gatsby-image.gatsbyjs.org/)
 -   [Gatsby Code examples for Image Plugin](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-gatsby-image/src/pages)
 
+#### Fluid Images
+
+**Note:** In the video, the `maxWidth` attribute of the image (in the graphql variable) was set to `500`. However, this should have been set to `960`, which matches the `max-width` of the enclosing container div.
+
+Give your header image a fluid/responsive image.
+
+_Path: `blog/src/templates/article.js`_
+
+A. Edit the query variable export to match:
+
+```
+export const query = graphql`
+  query ArticleTemplate($id: String!) {
+    strapiArticle(id: { eq: $id }) {
+      title
+      content
+      image {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      author {
+        id
+        username
+      }
+    }
+  }
+`
+```
+
+B. Edit the `<Img />` component tag as follows:
+
+```
+<Img fluid={data.strapiArticle.image.childImageSharp.fluid} />
+```
+
 #### Author view
 
 Articles are written by authors. They deserve a dedicated page.
