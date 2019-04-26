@@ -17,35 +17,32 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 5. [Setting up Gatsby Video](https://youtu.be/SnrEEW1uTlU) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/5-setting-up-gatsby)
 6. [Create our Index Page Video](https://youtu.be/UaFgCubwRD8) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/6-create-our-index-page)
 7. [Create the Article Page View Video](https://youtu.be/ub-uB17ufe0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/7-create-the-article-page-view)
+8. [Create the Article Page View Video](https://youtu.be/mPyJrjD3oU0) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/8-gatsby-images-and-author-page)
 
 ---
 
-### 7. Create the Article page view
+### 8. Gatsby Images and author page
 
 _Important links from Video:_
 
--   [Gatsby Project Structure](https://www.gatsbyjs.org/docs/gatsby-project-structure/#gatsby-project-structure)
+-   [Gatsby Image Plugin](https://www.gatsbyjs.org/packages/gatsby-image/)
+-   [Gatsby Image Demo](https://using-gatsby-image.gatsbyjs.org/)
+-   [Gatsby Code examples for Image Plugin](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-gatsby-image/src/pages)
 
-#### Article view
+#### Author view
 
-Our website now starts looking like a blog which is a good thing. However, an important part is still missing: the article’s details page.
+Articles are written by authors. They deserve a dedicated page.
 
-Let's create the template, containing a specific GraphQL request and defining the content displayed:
+The processes for creating author views and article pages are very similar. First, create a new file in our `templates` folder called, `author.js`. Add the code below to this file.
 
-In order to do this, first create a folder called `templates` in your `src` directory. Then within `templates` create a file called `article.js`.
+_Path: `blog/src/templates/author.js`_
 
-_Path: `blog/src/templates/article.js`_
+<script src="https://gist.github.com/strapi-codesnipets/7a32216a4ccda60f3dc229294b19b444.js"></script>
 
-<script src="https://gist.github.com/strapi-codesnipets/9735a941cdbf1947625c66c19e420e7f.js"></script>
-
-That looks fine, but at this point, Gatsby does not know when this template should be displayed. Each article needs a specific URL. So, we are going to inform Gatsby about the new URLs we need thanks to the [`createPage` function](https://www.gatsbyjs.org/docs/creating-and-modifying-pages).
-
-First, we are going to code a new function called `makeRequest` to execute the GraphQL request. Then, we export a function named `createPages` in which we get the list of articles and create a page for each of them. Here is the result:
+Second, we update the `gatsby-node.js` file to create the URLs (with the below code):
 
 _Path: `blog/gatsby-node.js`_
 
-<script src="https://gist.github.com/strapi-codesnipets/c9c4212fcef1af5801195b9670c67dee.js"></script>
+<script src="https://gist.github.com/strapi-codesnipets/d7fd2b3a1b24452acfe5b45854157780.js"></script>
 
-Restart the Gatsby server.
-
-From now on, you should be able to visit the detail page by clicking on URLs displayed on the homepage.
+Finally, restart the server and visit the author page from the article view's links.
