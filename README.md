@@ -29,7 +29,7 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 11. [Deploy Gatgsby to Netlify Video](https://youtu.be/rzR3yn9Ej3o) - [Branch](https://github.com/strapi/strapi-heroku-cms-demo/tree/11-deploy-gatsby-to-netlify)
 
-12. [Webhooks with Gatsby & Strapi Video](https://youtu.be/u5NQd8ruPl4) - [Branch](#)
+12. [Webhooks with Gatsby & Strapi Video](https://youtu.be/u5NQd8ruPl4) - [Branch](https://github.com/strapi/strapi-heroku-cms-demo/tree/12-webhooks-with-gatsby-and-strapi)
 
 ### 12. Webhooks with Gatsby & Strapi
 
