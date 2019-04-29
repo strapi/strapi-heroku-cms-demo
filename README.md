@@ -27,139 +27,168 @@ Each video has a Branch. Each branch contains the code at the **END** of the vid
 
 10. [Set-up Cloudinary & Netlify Predeploy Video](https://youtu.be/n-_CzffU0xA) - [Branch](https://github.com/davidkartuzinski/strapi-heroku-cms-demo/tree/10-setup-cloudinary-and-netlify-predeploy)
 
-11. [Deploy Gatgsby to Netlify Video](https://youtu.be/rzR3yn9Ej3o) - [Branch](#)
+11. [Deploy Gatgsby to Netlify Video](https://youtu.be/rzR3yn9Ej3o) - [Branch](https://github.com/strapi/strapi-heroku-cms-demo/tree/11-deploy-gatsby-to-netlify)
 
-### 11. Deploy Gatsby to Netlify
+12. [Webhooks with Gatsby & Strapi Video](https://youtu.be/u5NQd8ruPl4) - [Branch](https://github.com/strapi/strapi-heroku-cms-demo/tree/12-webhooks-with-gatsby-and-strapi)
+
+### 12. Webhooks with Gatsby & Strapi
 
 _Important links from Video:_
 
--   [Create Free Account with Netlify](https://app.netlify.com/signup)
--   [Netlify CLI Documentation](https://www.netlify.com/docs/cli/)
--   [Video Demo URL](https://tutorial-netlify-demo.netlify.com/)
--   [This Video Tutorial GitHub DEMO](https://github.com/davidkartuzinski/tutorial-netlify-demo)
--   [Long-term Netlify Demo](https://strapi-gatsby-postgresql-demo.netlify.com/)
--   [Long-term Netlify Demo GitHub](https://github.com/davidkartuzinski/strapi-gatsby-postgresql-demo)
+-   [Final Netlify Demo URL](https://strapi-gatsby-postgresql-demo.netlify.com/)
+-   [Final Heroku Demo URL](https://strapi-gatsby-postgresql-demo.herokuapp.com/)
+-   [Netlify Webhooks Doc](https://www.netlify.com/docs/webhooks/)
+-   [Strapi Webhooks Doc](https://strapi.io/documentation/3.x.x/guides/webhooks.html)
+-   [GitHub for Netlify hosted Demo](https://github.com/davidkartuzinski/strapi-gatsby-postgresql-demo)
 
-You are going to need to prepare a few things:
+#### Create and Copy a Netlify WebHook URL
 
--   Sign-up for a [Free Account with Netlify](https://app.netlify.com/signup)
--   Create a [new GitHub Repo](https://help.github.com/en/articles/create-a-repo) where your Gatsby site will live and be updated from.
+1. Login into your [Netlify Login](https://app.netlify.com/)
+2. From your App, go to: Settings -> Build & deploy -> Continuous deployment -> Build hooks
 
-Next, the **Gatsby** part of your project, needs to be pushed to your new GitHub repo:
+-   Click `Add build hook`
+-   Give your app a `build hook name`, e.g. `strapiUpdate`
+-   Save it and then copy the issued URL to the clipboard.
 
-`Path: ./blog/`
+#### Add a Variable to your `custom.json` file
 
+You will need to create a variable for the webhook. We will use this variable to update any content-type and their models. If the webhook changes, you will only need to change this variable.
+
+`Path: ./cms/config/environments/production/custom.json`
+
+Add the following line:
+
+```json
+  "staticWebsiteBuildURL": "https://api.netlify.com/build_hooks/5cc30b_YOUR_CUSTOM_URL_2a83"
 ```
-git init
-git add .
-git commit -m "first commit"
-git remote add origin git@github.com:YOUR-NAME/YOUR-NEW-EMPTY-REPO.git
-git push -u origin master
+
+And it should look like this after:
+
+```json
+{
+	"myCustomConfiguration": "This configuration is accessible through strapi.config.environments.production.myCustomConfiguration",
+	"staticWebsiteBuildURL": "https://api.netlify.com/build_hooks/5cc30b_YOUR_CUSTOM_URL_2a83"
+}
 ```
 
-After setting up your Gatsby site on GitHub for deployment to Netlify, we need to edit the `gatsby-config.js`.
+#### Modify the model for the `Article` Content Type
 
-Locate `gatsby-source-strapi` plugin object and replace it with the following code:
+The following is the new `Article.js` file. This file now has additional code that use the variable withe the netlify webhook. Whenever this Content Type is creates a new instance, updates one or deletes one of the content types, it will fire a `Post` request to Netlify using the Webhook URL.
 
-`Path: ./blog/gatsby-config.js`
+`Path: ./cms/api/article/models/Article.js`
 
 ```js
-    {
-      resolve: `gatsby-source-strapi`,
-      options: {
-        apiURL: process.env.DEPLOY_URL
-          ? "https://YOUR-APP-URL.herokuapp.com"
-          : "http://localhost:1337",
-        contentTypes: [`article`, `user`],
-        queryLimit: 1000,
-      },
-    },
+"use strict";
 
+const axios = require("axios");
+
+/**
+ * Lifecycle callbacks for the `Article` model.
+ */
+
+module.exports = {
+	// Before saving a value.
+	// Fired before an `insert` or `update` query.
+	// beforeSave: async (model, attrs, options) => {},
+
+	// After saving a value.
+	// Fired after an `insert` or `update` query.
+	// afterSave: async (model, response, options) => {},
+
+	// Before fetching a value.
+	// Fired before a `fetch` operation.
+	// beforeFetch: async (model, columns, options) => {},
+
+	// After fetching a value.
+	// Fired after a `fetch` operation.
+	// afterFetch: async (model, response, options) => {},
+
+	// Before fetching all values.
+	// Fired before a `fetchAll` operation.
+	// beforeFetchAll: async (model, columns, options) => {},
+
+	// After fetching all values.
+	// Fired after a `fetchAll` operation.
+	// afterFetchAll: async (model, response, options) => {},
+
+	// Before creating a value.
+	// Fired before an `insert` query.
+	// beforeCreate: async (model, attrs, options) => {},
+
+	// After creating a value.
+	// Fired after an `insert` query.
+	// afterCreate: async (model, attrs, options) => {
+	afterCreate: async entry => {
+		axios
+			.post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+			.catch(() => {
+				// Ignore
+			});
+	},
+
+	// Before updating a value.
+	// Fired before an `update` query.
+	// beforeUpdate: async (model, attrs, options) => {},
+
+	// After updating a value.
+	// Fired after an `update` query.
+	// afterUpdate: async (model, attrs, options) => {
+	afterUpdate: async entry => {
+		axios
+			.post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+			.catch(() => {
+				// Ignore
+			});
+	},
+
+	// Before destroying a value.
+	// Fired before a `delete` query.
+	// beforeDestroy: async (model, attrs, options) => {},
+
+	// After destroying a value.
+	// Fired after a `delete` query.
+	// afterDestroy: async (model, attrs, options) => {
+	afterDestroy: async entry => {
+		axios
+			.post(strapi.config.currentEnvironment.staticWebsiteBuildURL, entry)
+			.catch(() => {
+				// Ignore
+			});
+	},
+};
 ```
 
-Open your `.gitignore` file and add `package-lock.json` to the ignore list.
+#### Install Axios
 
-`Path: ./.gitignore`
+Your new code changes require the installation of an npm package called, `axios`.
 
-```
-...
+From you command line:
 
-# Yarn
-yarn-error.log
-.pnp/
-.pnp.js
-# Yarn Integrity file
-.yarn-integrity
-
-package-lock.json
-```
-
-Next, you need to `git add`, `git commit` and `git push` your new changes. From your command line:
-
-`Path: ./blog/`
+`Path: ./cms`
 
 ```
-git add .
-git commit -m "Update config-gatsby.js and .gitignore file"
-git push
+npm i axios --save
 ```
 
-In order to easily push your Gatsby site to Netlify, you have to install and login to Netlify using the `Netlify CLI`:
+#### Commit and Push to Heroku and Update Netlify
+
+You will now need to `add`, `commit` and `push` your changes in the project. These changes were made in the Strapi files. Doing this will automatically fire a `Post` request to Netlify, which will update Netlify automatically.
 
 From your command line:
 
-```
-npm install netlify-cli -g
-netlify login
-```
-
-Press the `Authorize` button and close the tab or window.
-
-Netlify is now set-up on your computer. It's time to initialize your project (Please pay close attention to the `build command` and `directory`):
-
-`Path: ./blog/`
-
-```
-netlify init
-? What would you like to do? + Create & configure a new site
-? Site name (optional):
-? Team: YOUR NAME HERE
-
-Site Created
-
-Admin url: https://app.netlify.com/sites/SITE-NAME
-Site url:  https://SITE-NAME.netlify.com
-Site ID: YOUR-UNIQUE-SITE-ID
-
-? Your build command (hugo/yarn run build/etc): gatsby build
-? Directory to deploy (blank for current dir): public
-? No netlify.toml detected. Would you like to create one with these build settings? Yes
-
-Creating Netlify Github Notification Hooks...
-Netlify Notification Hooks configured!
-
-Netlify CI/CD Configured!
-
-The site is now configured to automatically deploy from github branches & pull requests
-
-Next steps:
-
-  git push       Push to your git repository to trigger new site builds
-  netlify open   Open the Netlify adlin URL of your site
-
-```
-
-A last `git add`, `git commit` and `git push` are needed in order to finish the connection between your github and Netlify. Then open your `Netlify Deployment Console`.
-
-From your command line:
-
-`Path: ./blog/`
+`Path: ./cms/`
 
 ```
 git add .
-git commit -m "netlify config settings files"
-git push
-netlify open
+git commit -m “added webhook for netlify”
+heroku login
+git push heroku master
 ```
 
-After Netlify finishes deploying your site, you can click the green site link to see it.
+#### Webhooks configured
+
+After Netlify has had a moment to issue the command to rebuild and has done so, you will be able to login into your Heroku based Strapi project and make updates which automatically update Netlify.
+
+#### Additional Content Types
+
+In this example tutorial we created one Content Type called, `article`. You will need to update the model file (as above) for every additional Content Type you create for your project AND which should trigger a `Gatsby rebuild`.
