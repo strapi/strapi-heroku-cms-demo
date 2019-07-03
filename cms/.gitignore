@@ -103,4 +103,16 @@ node_modules
 testApp
 coverage
 
+############################
+# Strapi
+############################
+
+exports
+.cache
+build
+
+############################
+# Strapi Heroku
+############################
+
 package-lock.json

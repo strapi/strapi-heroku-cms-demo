@@ -12,21 +12,18 @@
   },
   "attributes": {
     "title": {
-      "default": "",
-      "unique": true,
       "minLength": 10,
-      "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "type": "string"
     },
     "content": {
-      "default": "",
       "type": "text"
     },
     "image": {
       "model": "file",
       "via": "related",
-      "plugin": "upload",
-      "required": false
+      "plugin": "upload"
     },
     "author": {
       "model": "user",

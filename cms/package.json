@@ -3,13 +3,12 @@
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application.",
-  "main": "./server.js",
   "scripts": {
-    "setup": "cd admin && npm run setup",
-    "start": "node server.js",
-    "strapi": "node_modules/strapi/bin/strapi.js",
-    "lint": "node_modules/.bin/eslint api/**/*.js config/**/*.js plugins/**/*.js",
-    "postinstall": "node node_modules/strapi/lib/utils/post-install.js"
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "lint": "eslint api/**/*.js config/**/*.js plugins/**/*.js"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -19,14 +18,23 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "knex": "latest",
     "lodash": "^4.17.5",
-    "pg": "^7.10.0",
+    "pg": "^7.11.0",
     "sqlite3": "latest",
-    "strapi": "3.0.0-alpha.25.2",
-    "strapi-hook-bookshelf": "3.0.0-alpha.25.2",
-    "strapi-hook-knex": "3.0.0-alpha.25.2"
+    "strapi": "3.0.0-beta.7",
+    "strapi-admin": "3.0.0-beta.7",
+    "strapi-hook-bookshelf": "3.0.0-beta.7",
+    "strapi-hook-knex": "3.0.0-beta.7",
+    "strapi-plugin-content-manager": "3.0.0-beta.7",
+    "strapi-plugin-content-type-builder": "3.0.0-beta.7",
+    "strapi-plugin-email": "3.0.0-beta.7",
+    "strapi-plugin-settings-manager": "3.0.0-beta.7",
+    "strapi-plugin-upload": "3.0.0-beta.7",
+    "strapi-plugin-users-permissions": "3.0.0-beta.7",
+    "strapi-provider-upload-cloudinary": "^3.0.0-alpha.15",
+    "strapi-utils": "3.0.0-beta.7"
   },
   "author": {
     "name": "david",
@@ -41,8 +49,7 @@
     }
   ],
   "strapi": {
-    "packageManager": "npm",
-    "uuid": "333d7977-6508-44f9-9185-24588ac7409a"
+    "uuid": "5828e072-011a-429b-b328-8c0920770796"
   },
   "engines": {
     "node": "10.x",
